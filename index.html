@@ -24,32 +24,34 @@ var map = new mapboxgl.Map({
     zoom: 1
 });
 
+
 map.on('load', function() {
 
     // Add a new source from our GeoJSON data and set the
     // 'cluster' option to true.
-    map.addSource("Go_places", {
+    map.addSource("earthquakes", {
         type: "geojson",
-        // Point to GeoJSON data. This points to Go map date with missionaries, trips...
+        // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+        // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
         data: "https://www.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson",
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
         clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
     });
 
-    // Use the Go_places source to create five layers:
-    // One for unclustered points, four for each cluster category, e.g.missionary,mission trip,organization,campus
+    // Use the earthquakes source to create five layers:
+    // One for unclustered points, three for each cluster category,
     // and one for cluster labels.
     map.addLayer({
         "id": "unclustered-points",
         "type": "symbol",
-        "source": "Go_places",
+        "source": "earthquakes",
         "layout": {
             "icon-image": "marker-15"
         }
     });
 
-    // Display the Go_place data in three layers, each filtered to a range of
+    // Display the earthquake data in three layers, each filtered to a range of
     // count values. Each range gets a different fill color.
     var layers = [
         [150, '#f28cb1'],
@@ -61,7 +63,7 @@ map.on('load', function() {
         map.addLayer({
             "id": "cluster-" + i,
             "type": "circle",
-            "source": "Go_places",
+            "source": "earthquakes",
             "paint": {
                 "circle-color": layer[1],
                 "circle-radius": 18
@@ -78,7 +80,7 @@ map.on('load', function() {
     map.addLayer({
         "id": "cluster-count",
         "type": "symbol",
-        "source": "Go_places",
+        "source": "earthquakes",
         "layout": {
             "text-field": "{point_count}",
             "text-font": [
