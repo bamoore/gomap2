@@ -35,7 +35,7 @@ map.on('load', function() {
         data: "goMapData-1470362862778.geojson",
         cluster: true,
         clusterMaxZoom: 14, // Max zoom to cluster points on
-        clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+        clusterRadius: 25 // Radius of each cluster when clustering points (defaults to 50)
     });
 
     // Use the earthquakes source to create five layers:
@@ -65,7 +65,7 @@ map.on('load', function() {
             "source": "earthquakes",
             "paint": {
                 "circle-color": layer[1],
-                "circle-radius": 18
+                "circle-radius": 30
             },
             "filter": i === 0 ?
                 [">=", "point_count", layer[0]] :
