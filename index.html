@@ -61,7 +61,7 @@ map.on('load', function() {
     ];
 
     layers.forEach(function (layer, i) {
-        layer.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+        
         map.addLayer({
             "id": "cluster-" + i,
             "type": "circle",
@@ -76,6 +76,7 @@ map.on('load', function() {
                     [">=", "point_count", layer[0]],
                     ["<", "point_count", layers[i - 1][0]]]
         });
+        layer.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
     });
 
     // Add a layer for the clusters' count labels
