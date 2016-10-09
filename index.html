@@ -50,7 +50,6 @@ map.on('load', function() {
         "layout": {
             "icon-image": "marker-15"
         }
-        this.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     });
 
     // Display the earthquake data in three layers, each filtered to a range of
@@ -62,6 +61,7 @@ map.on('load', function() {
     ];
 
     layers.forEach(function (layer, i) {
+        layer.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
         map.addLayer({
             "id": "cluster-" + i,
             "type": "circle",
