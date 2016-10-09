@@ -11,6 +11,10 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
+        .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
     </style>
 </head>
 <body>
@@ -94,6 +98,25 @@ map.on('load', function() {
             "text-size": 12
         }
     });
+
+var markers 
+
+});
+map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['unclustered-points'] });
+
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    var popup = new mapboxgl.Popup()
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
 });
 </script>
 
